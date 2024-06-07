@@ -4,6 +4,7 @@ import "errors"
 
 var (
 	ErrHandlerAlreadyRegistered = errors.New("handler already registered")
+	ErrHandlerNotFound          = errors.New("handler not found")
 )
 
 type EventDispatcher struct {
@@ -43,4 +44,15 @@ func (ed *EventDispatcher) Has(eventName EventName, handler EventHandlerInterfac
 		}
 	}
 	return false
+}
+
+func (ed *EventDispatcher) Dispatch(event EventInterface) error {
+	handlers, ok := ed.handlers[event.GetName()]
+	if !ok {
+		return ErrHandlerNotFound
+	}
+	for _, handler := range handlers {
+		handler.Handle(event)
+	}
+	return nil
 }
