@@ -56,3 +56,17 @@ func (ed *EventDispatcher) Dispatch(event EventInterface) error {
 	}
 	return nil
 }
+
+func (ed *EventDispatcher) Remove(eventName EventName, handler EventHandlerInterface) error {
+	handlers, ok := ed.handlers[eventName]
+	if !ok {
+		return ErrHandlerNotFound
+	}
+	for i, h := range handlers {
+		if h == handler {
+			ed.handlers[eventName] = append(handlers[:i], handlers[i+1:]...)
+			return nil
+		}
+	}
+	return ErrHandlerNotFound
+}
