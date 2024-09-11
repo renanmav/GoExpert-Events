@@ -11,6 +11,7 @@ type EventInterface interface {
 	GetName() EventName
 	GetDateTime() time.Time
 	GetPayload() interface{}
+	SetPayload(payload interface{})
 }
 
 type EventHandlerInterface interface {
