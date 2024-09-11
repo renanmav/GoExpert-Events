@@ -23,5 +23,5 @@ type EventDispatcherInterface interface {
 	Dispatch(event EventInterface) error
 	Remove(eventName EventName, handler EventHandlerInterface) error
 	Has(eventName EventName, handler EventHandlerInterface) bool
-	Clear() error
+	Clear()
 }

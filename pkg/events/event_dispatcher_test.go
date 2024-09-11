@@ -1,12 +1,13 @@
 package events
 
 import (
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/mock"
-	"github.com/stretchr/testify/suite"
 	"sync"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/suite"
 )
 
 type TestEvent struct {
@@ -20,6 +21,10 @@ func (e *TestEvent) GetName() EventName {
 
 func (e *TestEvent) GetPayload() interface{} {
 	return e.Payload
+}
+
+func (e *TestEvent) SetPayload(payload interface{}) {
+	e.Payload = payload
 }
 
 func (e *TestEvent) GetDateTime() time.Time {
